@@ -13,7 +13,7 @@
     <div class="w-full max-w-sm bg-white rounded-2xl border border-slate-200 overflow-hidden">
         <!-- Header -->
         <div class="px-8 pt-8 pb-6 text-center">
-            <div class="w-16 h-16 bg-slate-800 rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden">
+            <div class="rounded-xl flex items-center justify-center mx-auto mb-4 overflow-hidden">
                 <img src="{{ asset('images/idefu.png') }}" alt="Idefu Logo" class="w-12 h-12 object-contain">
             </div>
             <h1 class="text-2xl font-bold text-slate-900 mb-2">Welcome Back</h1>

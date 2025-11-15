@@ -29,7 +29,7 @@
         .header {
             margin-bottom: 25px;
             padding-bottom: 15px;
-            border-bottom: 4px solid #F98127;
+            border-bottom: 4px solid #31843c;
         }
 
         .header-table {
@@ -55,7 +55,7 @@
         .logo-placeholder {
             width: 100px;
             height: 100px;
-            background: #F98127;
+            background: #31843c;
             border-radius: 10px;
             text-align: center;
             vertical-align: middle;
@@ -73,7 +73,7 @@
         .company-name {
             font-size: 62px;
             font-weight: bold;
-            color: #F98127;
+            color: #31843c;
             margin-bottom: 8px;
             line-height: 100px;
         }
@@ -92,7 +92,7 @@
         .invoice-title {
             font-size: 56px;
             font-weight: bold;
-            color: #F98127;
+            color: #31843c;
             margin-bottom: 10px;
         }
 
@@ -124,7 +124,7 @@
         .section-title {
             font-size: 24px;
             font-weight: bold;
-            color: #F98127;
+            color: #31843c;
             margin-bottom: 10px;
             padding-bottom: 5px;
             border-bottom: 2px solid #e5e7eb;
@@ -141,7 +141,7 @@
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            border-left: 5px solid #F98127;
+            border-left: 5px solid #31843c;
         }
 
         .details-grid {
@@ -176,7 +176,7 @@
         }
 
         .items-table th {
-            background: #F98127;
+            background: #31843c;
             color: white;
             padding: 15px 10px;
             text-align: center;
@@ -242,7 +242,7 @@
         }
 
         .totals-table tr:last-child {
-            border-bottom: 3px solid #F98127;
+            border-bottom: 3px solid #31843c;
             font-weight: bold;
             font-size: 24px;
         }
@@ -272,7 +272,7 @@
         .payment-title {
             font-size: 24px;
             font-weight: bold;
-            color: #F98127;
+            color: #31843c;
             margin-bottom: 10px;
         }
 
@@ -302,7 +302,7 @@
         .terms-title {
             font-size: 24px;
             font-weight: bold;
-            color: #F98127;
+            color: #31843c;
             margin-bottom: 10px;
         }
 
@@ -393,7 +393,7 @@
                                             style="width: 100px; object-fit: contain; border-radius: 10px;">
                                     @else
                                         <div class="logo-placeholder">
-                                            IDEFU
+                                            SRIJAYA INDO FURNITURE
                                         </div>
                                     @endif
                                 </td>
@@ -404,17 +404,22 @@
                             <tr>
                                 <td colspan="2" style="padding-left: 0;">
                                     <div class="company-address">
-                                        {{ $invoice->company_address ?? 'Office : Jl. Hugeng Imam Santoso Km.09 Ngabul Tahunan Jepara, Central Java Indonesia. Workshop : Bawu Rt 10/02 Batealit Jepara.' }}<br>
-                                        Telp: {{ $invoice->company_phone ?? '+6285741555089' }} | Email:
-                                        {{ $invoice->company_email ?? 'idesign@idefu.co.id' }} |
-                                        {{ $invoice->company_website ?? 'idefu.co.id' }}
+                                        {{ $invoice->company_address ?? 'Office :  Jalan Lembah II RT 01 RW 02 Sukodono, Jepara, Jawa Tengah Indonesia' }}<br>
+                                        Telp: {{ $invoice->company_phone ?? '+6282230020606' }} | Email:
+                                        {{ $invoice->company_email ?? 'cs.srijayafurniture@gmail.com' }} |
+                                        {{ $invoice->company_website ?? 'https://indosrijayafurniture.com/' }}
                                     </div>
                                 </td>
                             </tr>
                         </table>
                     </td>
                     <td class="invoice-header">
-                        <div class="invoice-title">INVOICE</div>
+                        <div class="invoice-title">
+                            @if ($ilwLogoBase64)
+                                <img src="{{ $ilwLogoBase64 }}" alt="Logo ILW"
+                                style="width: 120px; object-fit: contain; border-radius: 10px;">
+                            @endif
+                        </div>
                         <div class="invoice-number"># {{ $invoice->invoice_number }}</div>
                     </td>
                 </tr>
@@ -426,17 +431,19 @@
             <table class="billing-table">
                 <tr>
                     <td>
-                        <div class="section-title">BILL TO</div>
+                        <div class="section-title">BILL TO /MR/MRS</div>
                         <div class="address-info">
                             <strong>{{ $invoice->order->customer->name ?? 'N/A' }}</strong><br>
-                            {{ $invoice->order->customer->address ?? 'Alamat customer akan ditampilkan di sini' }}
+                            {{ $invoice->order->customer->address ?? 'Alamat customer akan ditampilkan di sini' }} <br>
+                            {{ $invoice->order->customer->phone ?? 'N/A' }}
                         </div>
                     </td>
                     <td>
-                        <div class="section-title">SHIP TO</div>
+                        <div class="section-title">SHIP TO /MR/MRS</div>
                         <div class="address-info">
                             <strong>{{ $invoice->order->customer->name ?? 'N/A' }}</strong><br>
                             {{ $invoice->shipping_address ?? ($invoice->order->customer->address ?? 'Alamat pengiriman akan ditampilkan di sini') }}<br>
+                            {{ $invoice->order->customer->phone ?? 'N/A' }}
                         </div>
                     </td>
                 </tr>
@@ -452,7 +459,7 @@
                         class="detail-value">{{ \Carbon\Carbon::parse($invoice->invoice_date)->format('d M Y') }}</span>
                 </div>
                 <div class="detail-item">
-                    <span class="detail-label">Due Date:</span>
+                    <span class="detail-label">Delivery Date:</span>
                     <span class="detail-value">{{ \Carbon\Carbon::parse($invoice->due_date)->format('d M Y') }}</span>
                 </div>
                 <div class="detail-item">
@@ -553,7 +560,7 @@
                 @if ($invoice->order->product_type !== 'custom')
                     <tr>
                         <td class="total-label"><strong>TOTAL:</strong></td>
-                        <td class="total-amount" style="color: #F98127;"><strong>Rp
+                        <td class="total-amount" style="color: #31843c;"><strong>Rp
                                 {{ number_format($invoice->total_amount, 0, ',', '.') }}</strong></td>
                     </tr>
                     @if ($invoice->paid_amount > 0 && $invoice->paid_amount < $invoice->total_amount)
@@ -587,7 +594,7 @@
                         <div style="display: flex; justify-content: space-between;">
                             <span style="font-size: 19px;">Status:</span>
                             <span
-                                style="font-weight: bold; color: #F98127; font-size: 19px;">{{ $invoice->payment_status_display }}</span>
+                                style="font-weight: bold; color: #31843c; font-size: 19px;">{{ $invoice->payment_status_display }}</span>
                         </div>
                         <div
                             style="margin-top: 12px; padding: 10px; background: #fef3c7; border-radius: 6px; font-size: 18px; color: #92400e;">

@@ -136,11 +136,11 @@ class InvoiceController extends Controller
                 
                 // Product and company information (default values)
                 'product_image' => $order->image, // Use order image as product image
-                'company_name' => 'Idefu Furniture',
-                'company_address' => 'Office : Jl. Hugeng Imam Santoso Km.09 NGabul Tahunan Jepara, Central Java Indonesia. Workshop : Bawu Rt 10/02 Batealit Jepara.',
-                'company_phone' => '+6285741555089',
-                'company_email' => 'idesign@idefu.co.id',
-                'company_website' => 'idefu.co.id',
+                'company_name' => 'CV. SRIJAYA INDO FURNITURE',
+                'company_address' => 'Office :  Jalan Lembah II RT 01 RW 02 Sukodono, Jepara, Jawa Tengah Indonesia',
+                'company_phone' => '+6282230020606',
+                'company_email' => 'cs.srijayafurniture@gmail.com',
+                'company_website' => 'https://indosrijayafurniture.com/',
                 
                 // Shipping information
                 'shipping_address' => $request->input('shipping_address', $order->customer->address ?? ''),
@@ -155,7 +155,7 @@ class InvoiceController extends Controller
                 
                 // Invoice customization (default values)
                 'po_number' => 'PO-' . date('Y') . '-' . str_pad($order->id, 3, '0', STR_PAD_LEFT),
-                'seller_name' => 'Idefu Furniture',
+                'seller_name' => 'Srijayafurniture',
                 'terms_conditions' => 'Payment must be made before the due date specified on the invoice. Items that have been ordered and produced cannot be cancelled or returned. Specification changes after production has started will incur additional costs. Production time is calculated after payment is received and final specifications are approved. All disputes will be resolved through consultation or arbitration.',
                 'notes_customer' => $request->input('notes_customer'),
                 
@@ -382,12 +382,13 @@ class InvoiceController extends Controller
         
         // Prepare logo data for PDF
         $logoBase64 = $this->getLogoAsBase64($invoice);
+        $ilwLogoBase64 = $this->getIlwLogoAsBase64($invoice);
         
         // Prepare product image data for PDF
         $productImageBase64 = $this->getProductImageAsBase64($invoice);
         
         // Generate PDF using DomPDF with logo data and optimized margins
-        $pdf = Pdf::loadView('invoices.pdf', compact('invoice', 'logoBase64', 'productImageBase64'))
+        $pdf = Pdf::loadView('invoices.pdf', compact('invoice', 'logoBase64', 'productImageBase64', 'ilwLogoBase64'))
             ->setOption('isHtml5ParserEnabled', true)
             ->setOption('isRemoteEnabled', true)
             ->setOption('dpi', 150)
@@ -460,6 +461,25 @@ class InvoiceController extends Controller
             if (file_exists($logoPath)) {
                 return $this->encodeImageToBase64($logoPath);
             }
+        }
+        
+        // Return null if no logo found
+        return null;
+    }
+
+    private function getIlwLogoAsBase64($invoice)
+    {
+        // Check if ilw.png exists in public/images
+        $logoPath = public_path('images/ilw.png');
+        if (file_exists($logoPath)) {
+            $base64 = $this->encodeImageToBase64($logoPath);
+            if ($base64) {
+                return $base64;
+            } else {
+                \Log::warning('ILW logo found but failed to encode: ' . $logoPath);
+            }
+        } else {
+            \Log::warning('ILW logo not found at path: ' . $logoPath);
         }
         
         // Return null if no logo found
