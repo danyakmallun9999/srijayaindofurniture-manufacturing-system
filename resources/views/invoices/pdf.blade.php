@@ -38,18 +38,23 @@
         }
 
         .header-table td {
-            vertical-align: top;
-            padding: 0;
+            vertical-align: middle;
+            padding: 0 10px;
         }
 
-        .company-info-table {
-            width: 100%;
-            border-collapse: collapse;
+        .header-table td:first-child {
+            width: 120px;
+            text-align: left;
         }
 
-        .company-info-table td {
-            vertical-align: top;
-            padding: 0;
+        .header-table td:nth-child(2) {
+            text-align: center;
+            width: auto;
+        }
+
+        .header-table td:last-child {
+            width: 200px;
+            text-align: right;
         }
 
         .logo-placeholder {
@@ -65,40 +70,34 @@
             line-height: 100px;
         }
 
-        .company-details {
-            padding-left: 20px;
-            vertical-align: middle;
-        }
-
         .company-name {
-            font-size: 62px;
+            font-size: 48px;
             font-weight: bold;
             color: #31843c;
             margin-bottom: 8px;
-            line-height: 100px;
+            text-align: center;
         }
 
         .company-address {
             color: #666;
             line-height: 1.5;
             font-size: 20px;
+            text-align: center;
         }
 
-        .invoice-header {
+        .invoice-header-right {
             text-align: right;
-            width: 250px;
         }
 
         .invoice-title {
-            font-size: 56px;
-            font-weight: bold;
-            color: #31843c;
             margin-bottom: 10px;
+            text-align: right;
         }
 
         .invoice-number {
-            font-size: 24px;
+            font-size: 16px;
             color: #666;
+            text-align: right;
         }
 
         .billing-section {
@@ -384,36 +383,29 @@
         <div class="header">
             <table class="header-table">
                 <tr>
-                    <td class="invoice-header">
-                        <table class="company-info-table">
-                            <tr>
-                                <td style="width: 120px; padding-right: 15px; vertical-align: middle;">
-                                    @if ($logoBase64)
-                                        <img src="{{ $logoBase64 }}" alt="Logo Perusahaan"
-                                            style="width: 100px; object-fit: contain; border-radius: 10px;">
-                                    @else
-                                        <div class="logo-placeholder">
-                                            SRIJAYA INDO FURNITURE
-                                        </div>
-                                    @endif
-                                </td>
-                                <td class="company-details">
-                                    <div class="company-name">{{ $invoice->company_name }}</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td colspan="2" style="padding-left: 0;">
-                                    <div class="company-address">
-                                        {{ $invoice->company_address ?? 'Office :  Jalan Lembah II RT 01 RW 02 Sukodono, Jepara, Jawa Tengah Indonesia' }}<br>
-                                        Telp: {{ $invoice->company_phone ?? '+6282230020606' }} | Email:
-                                        {{ $invoice->company_email ?? 'cs.srijayafurniture@gmail.com' }} |
-                                        {{ $invoice->company_website ?? 'https://indosrijayafurniture.com/' }}
-                                    </div>
-                                </td>
-                            </tr>
-                        </table>
+                    <!-- Kolom Kiri: Logo Perusahaan -->
+                    <td>
+                        @if ($logoBase64)
+                            <img src="{{ $logoBase64 }}" alt="Logo Perusahaan"
+                                style="width: 100px; object-fit: contain; border-radius: 10px;">
+                        @else
+                            <div class="logo-placeholder">
+                                SRIJAYA INDO FURNITURE
+                            </div>
+                        @endif
                     </td>
-                    <td class="invoice-header">
+                    <!-- Kolom Tengah: Company Name dan Alamat -->
+                    <td>
+                        <div class="company-name">{{ $invoice->company_name }}</div>
+                        <div class="company-address">
+                            {{ $invoice->company_address ?? 'Office :  Jalan Lembah II RT 01 RW 02 Sukodono, Jepara, Jawa Tengah Indonesia' }}<br>
+                            Telp: {{ $invoice->company_phone ?? '+6282230020606' }} | Email:
+                            {{ $invoice->company_email ?? 'cs.srijayafurniture@gmail.com' }} |
+                            {{ $invoice->company_website ?? 'indosrijayafurniture.com' }}
+                        </div>
+                    </td>
+                    <!-- Kolom Kanan: ILW Logo dan Invoice Number -->
+                    <td class="invoice-header-right">
                         <div class="invoice-title">
                             @if ($ilwLogoBase64)
                                 <img src="{{ $ilwLogoBase64 }}" alt="Logo ILW"
@@ -665,7 +657,7 @@
         <div class="footer">
             <p><strong>Thank you for trusting your business to us.</strong></p>
             <p>This invoice is created electronically and is valid without a wet signature.</p>
-            <p>For questions regarding this invoice, contact us at idesign@idefu.co.id or +6285741555089</p>
+            <p>For questions regarding this invoice, contact us at cs.srijayafurniture@gmail.com or +6282230020606</p>
         </div>
     </div>
 </body>

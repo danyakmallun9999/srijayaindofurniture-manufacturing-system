@@ -140,7 +140,7 @@ class InvoiceController extends Controller
                 'company_address' => 'Office :  Jalan Lembah II RT 01 RW 02 Sukodono, Jepara, Jawa Tengah Indonesia',
                 'company_phone' => '+6282230020606',
                 'company_email' => 'cs.srijayafurniture@gmail.com',
-                'company_website' => 'https://indosrijayafurniture.com/',
+                'company_website' => 'indosrijayafurniture.com',
                 
                 // Shipping information
                 'shipping_address' => $request->input('shipping_address', $order->customer->address ?? ''),
@@ -155,7 +155,7 @@ class InvoiceController extends Controller
                 
                 // Invoice customization (default values)
                 'po_number' => 'PO-' . date('Y') . '-' . str_pad($order->id, 3, '0', STR_PAD_LEFT),
-                'seller_name' => 'Srijayafurniture',
+                'seller_name' => 'CV. SRIJAYA INDO FURNITURE',
                 'terms_conditions' => 'Payment must be made before the due date specified on the invoice. Items that have been ordered and produced cannot be cancelled or returned. Specification changes after production has started will incur additional costs. Production time is calculated after payment is received and final specifications are approved. All disputes will be resolved through consultation or arbitration.',
                 'notes_customer' => $request->input('notes_customer'),
                 
