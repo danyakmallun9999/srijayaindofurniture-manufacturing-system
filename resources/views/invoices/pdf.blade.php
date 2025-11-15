@@ -627,47 +627,7 @@
         </div>
     
 
-        @if ($invoice->order->product_type === 'custom')
-            <!-- Payment Information for Custom Products -->
-            <div class="payment-section">
-                <div class="payment-title">Payment Information</div>
-                <div class="payment-method">
-                    <div class="method-name">Payment Status</div>
-                    <div class="method-details">
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
-                            <span style="font-size: 19px;">Total Down Payment Paid:</span>
-                            <span style="font-weight: bold; color: #059669; font-size: 19px;">Rp
-                                {{ number_format($invoice->paid_amount, 0, ',', '.') }}</span>
-                        </div>
-                        <div style="display: flex; justify-content: space-between;">
-                            <span style="font-size: 19px;">Status:</span>
-                            <span
-                                style="font-weight: bold; color: #31843c; font-size: 19px;">{{ $invoice->payment_status_display }}</span>
-                        </div>
-                        <div
-                            style="margin-top: 12px; padding: 10px; background: #fef3c7; border-radius: 6px; font-size: 18px; color: #92400e;">
-                            <strong>Info:</strong> Final price will be calculated after production
-                            is completed.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        @else
-            <!-- Payment Methods for Fixed Products -->
-            <div class="payment-section">
-                <div class="payment-title">Payment Methods</div>
-                <div class="payment-method">
-                    <div class="method-name">{{ $invoice->payment_method_display ?? 'Bank Transfer BCA' }}</div>
-                    @if ($invoice->bank_name && $invoice->account_number)
-                        <div class="method-details">
-                            Bank: {{ $invoice->bank_name }}<br>
-                            Account No: {{ $invoice->account_number }}<br>
-                            Account Name: {{ $invoice->account_holder ?? 'Idefu Furniture' }}
-                        </div>
-                    @endif
-                </div>
-            </div>
-        @endif
+
 
         <!-- Terms and Conditions -->
         <div class="terms-section">
