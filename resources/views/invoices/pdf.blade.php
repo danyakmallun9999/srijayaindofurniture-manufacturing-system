@@ -520,9 +520,14 @@
             </tbody>
         </table>
 
-        <!-- Totals Section -->
+        <!-- Totals Section 2-->
         <div class="totals-section">
             <table class="totals-table">
+                <tr>
+                    <td class="total-label">Down Payment 1:</td>
+                    <td class="total-amount">Rp
+                    {{ number_format($invoice->paid_amount, 0, ',', '.') }}</td>
+                </tr>
                 <tr>
                     <td class="total-label">Subtotal:</td>
                     <td class="total-amount">Rp {{ number_format($invoice->subtotal, 0, ',', '.') }}</td>
@@ -569,7 +574,58 @@
                     </tr>
                 @endif
             </table>
+            <table class="totals-table">
+                <tr>
+                    <td class="total-label">Down Payment 2:</td>
+                </tr>
+                <tr>
+                    <td class="total-label">Subtotal:</td>
+                    <td class="total-amount">.......................................................</td>
+                </tr>
+                <tr>
+                    <td class="total-label">Shipping Cost:</td>
+                    <td class="total-amount">.......................................................</td>
+                </tr>
+                @if (($invoice->discount_amount ?? 0) > 0)
+                    <tr>
+                        <td class="total-label">Discount:</td>
+                        <td class="total-amount" style="color: #059669;">.......................................................</td>
+                    </tr>
+                    @if ($invoice->discount_reason)
+                        <tr style="border-bottom: none;">
+                            <td class="total-label" style="font-size: 18px; color: #6b7280; font-style: italic;">Discount reason:</td>
+                            <td class="total-amount" style="font-size: 18px; color: #6b7280; font-style: italic;"></td>
+                        </tr>
+                    @endif
+                @endif
+                @if ($invoice->order->product_type !== 'custom' && $invoice->paid_amount > 0)
+                    <tr>
+                        <td class="total-label">Down Payment:</td>
+                        <td class="total-amount">.......................................................</td>
+                    </tr>
+                @endif
+                @if ($invoice->order->product_type !== 'custom')
+                    <tr>
+                        <td class="total-label"><strong>TOTAL:</strong></td>
+                        <td class="total-amount" style="color: #31843c;"><strong>Rp
+                                .......................................................</strong></td>
+                    </tr>
+                    @if ($invoice->paid_amount > 0 && $invoice->paid_amount < $invoice->total_amount)
+                        <tr>
+                            <td class="total-label">Remaining Payment:</td>
+                            <td class="total-amount" style="color: #dc2626;">.......................................................</td>
+                        </tr>
+                    @endif
+                @else
+                    <tr>
+                        <td class="total-label"><strong>TOTAL:</strong></td>
+                        <td class="total-amount" style="color: #dc2626; font-style: italic;"><strong> 
+                                .......................................................</strong></td>
+                    </tr>
+                @endif
+            </table>
         </div>
+    
 
         @if ($invoice->order->product_type === 'custom')
             <!-- Payment Information for Custom Products -->
