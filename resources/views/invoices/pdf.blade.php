@@ -329,10 +329,16 @@
         }
 
         .signature-table td {
-            width: 50%;
-            vertical-align: top;
+            width: 33.33%;
+            vertical-align: middle;
             text-align: center;
-            padding: 0 20px;
+            padding: 0 15px;
+        }
+
+        .taplink-image {
+            max-width: 150px;
+            height: auto;
+            object-fit: contain;
         }
 
         .signature-title {
@@ -577,27 +583,8 @@
             <table class="totals-table">
                 <tr>
                     <td class="total-label">Down Payment 2:</td>
-                </tr>
-                <tr>
-                    <td class="total-label">Subtotal:</td>
                     <td class="total-amount">.......................................................</td>
                 </tr>
-                <tr>
-                    <td class="total-label">Shipping Cost:</td>
-                    <td class="total-amount">.......................................................</td>
-                </tr>
-                @if (($invoice->discount_amount ?? 0) > 0)
-                    <tr>
-                        <td class="total-label">Discount:</td>
-                        <td class="total-amount" style="color: #059669;">.......................................................</td>
-                    </tr>
-                    @if ($invoice->discount_reason)
-                        <tr style="border-bottom: none;">
-                            <td class="total-label" style="font-size: 18px; color: #6b7280; font-style: italic;">Discount reason:</td>
-                            <td class="total-amount" style="font-size: 18px; color: #6b7280; font-style: italic;"></td>
-                        </tr>
-                    @endif
-                @endif
                 @if ($invoice->order->product_type !== 'custom' && $invoice->paid_amount > 0)
                     <tr>
                         <td class="total-label">Down Payment:</td>
@@ -625,9 +612,24 @@
                 @endif
             </table>
         </div>
-    
-
-
+        
+        <!-- Payment Methods Section -->
+        <div class="payment-section">
+            <div class="payment-title">Payment Methods</div>
+            <div class="payment-method">
+                <div class="method-details">
+                    <div style="margin-bottom: 8px;">
+                        <strong>MANDIRI</strong> 1450013033697 A.N Sriyanto
+                    </div>
+                    <div style="margin-bottom: 8px;">
+                        <strong>BNI</strong> 0426775351 A.N Sriyanto
+                    </div>
+                    <div>
+                        <strong>BCA</strong> 8950400219 A.N Sriyanto
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Terms and Conditions -->
         <div class="terms-section">
@@ -664,6 +666,11 @@
                             <strong>{{ $invoice->order->customer->name ?? 'Customer Name' }}</strong><br>
                             Date: ___________
                         </div>
+                    </td>
+                    <td>
+                        @if ($taplinkBase64)
+                            <img src="{{ $taplinkBase64 }}" alt="Taplink" class="taplink-image">
+                        @endif
                     </td>
                 </tr>
             </table>

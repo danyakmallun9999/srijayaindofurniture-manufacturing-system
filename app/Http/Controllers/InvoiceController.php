@@ -387,8 +387,11 @@ class InvoiceController extends Controller
         // Prepare product image data for PDF
         $productImageBase64 = $this->getProductImageAsBase64($invoice);
         
+        // Prepare taplink image for PDF
+        $taplinkBase64 = $this->getTaplinkAsBase64($invoice);
+        
         // Generate PDF using DomPDF with logo data and optimized margins
-        $pdf = Pdf::loadView('invoices.pdf', compact('invoice', 'logoBase64', 'productImageBase64', 'ilwLogoBase64'))
+        $pdf = Pdf::loadView('invoices.pdf', compact('invoice', 'logoBase64', 'productImageBase64', 'ilwLogoBase64', 'taplinkBase64'))
             ->setOption('isHtml5ParserEnabled', true)
             ->setOption('isRemoteEnabled', true)
             ->setOption('dpi', 150)
@@ -483,6 +486,28 @@ class InvoiceController extends Controller
         }
         
         // Return null if no logo found
+        return null;
+    }
+
+    /**
+     * Get taplink image as base64 encoded string
+     */
+    private function getTaplinkAsBase64($invoice)
+    {
+        // Check if taplink.png exists in public/images
+        $taplinkPath = public_path('images/taplink.png');
+        if (file_exists($taplinkPath)) {
+            $base64 = $this->encodeImageToBase64($taplinkPath);
+            if ($base64) {
+                return $base64;
+            } else {
+                \Log::warning('Taplink image found but failed to encode: ' . $taplinkPath);
+            }
+        } else {
+            \Log::warning('Taplink image not found at path: ' . $taplinkPath);
+        }
+        
+        // Return null if no image found
         return null;
     }
 
