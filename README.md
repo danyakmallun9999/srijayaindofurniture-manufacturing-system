@@ -1,4 +1,4 @@
-# IDEFU Manufacturing Management System
+# Srijaya Manufacturing Management System
 
 [![Laravel](https://img.shields.io/badge/Laravel-12.x-red.svg)](https://laravel.com)
 [![PHP](https://img.shields.io/badge/PHP-8.2+-blue.svg)](https://php.net)
@@ -7,7 +7,7 @@
 
 A comprehensive manufacturing management system built with Laravel 12, designed to streamline order management, production tracking, inventory control, and financial reporting for manufacturing businesses.
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#-features)
 - [Technology Stack](#-technology-stack)
@@ -24,44 +24,50 @@ A comprehensive manufacturing management system built with Laravel 12, designed 
 - [Contributing](#-contributing)
 - [License](#-license)
 
-## ✨ Features
+## Features
 
-### 🏭 Core Manufacturing Features
+### Core Manufacturing Features
+
 - **Order Management**: Complete order lifecycle from creation to delivery
 - **Product Management**: Support for both fixed products and custom orders
 - **Bill of Materials (BOM)**: Detailed material tracking and management
 - **Production Tracking**: Real-time status updates and progress monitoring
 - **Inventory Management**: Stock tracking with automatic updates
 
-### 💰 Financial Management
+### Financial Management
+
 - **Cost Tracking**: Material costs, production costs, and overhead tracking
 - **Invoice Generation**: Automated PDF invoice generation with customization
 - **Payment Tracking**: Multiple payment methods and status tracking
 - **Financial Reporting**: Comprehensive reports with charts and analytics
 - **Profit/Loss Analysis**: Detailed financial insights per order and period
 
-### 📊 Reporting & Analytics
+### Reporting & Analytics
+
 - **Dashboard Analytics**: Real-time KPIs and performance metrics
 - **Order Reports**: Detailed order analysis and tracking
 - **Financial Reports**: Revenue, expenses, and profitability analysis
 - **Customer Reports**: Customer behavior and order history
 - **Export Functionality**: Excel/PDF export capabilities
 
-### 👥 User Management
+### User Management
+
 - **Role-Based Access Control**: Admin, Owner, Staff, and Finance roles
 - **User Authentication**: Secure login with Laravel Breeze
 - **Profile Management**: User profile customization
 - **Activity Logging**: Comprehensive audit trails
 
-## 🛠 Technology Stack
+## Technology Stack
 
 ### Backend
+
 - **Laravel 12.x**: PHP framework
 - **PHP 8.2+**: Programming language
 - **MySQL**: Database management system
 - **Laravel Breeze**: Authentication scaffolding
 
 ### Frontend
+
 - **Blade Templates**: Server-side templating
 - **Tailwind CSS 3.x**: Utility-first CSS framework
 - **Alpine.js**: Lightweight JavaScript framework
@@ -69,12 +75,13 @@ A comprehensive manufacturing management system built with Laravel 12, designed 
 - **Heroicons**: Icon library
 
 ### Additional Packages
+
 - **Laravel DomPDF**: PDF generation for invoices
 - **Maatwebsite Excel**: Excel import/export functionality
 - **Laravel Pint**: Code style fixer
 - **PHPUnit**: Testing framework
 
-## 🏗 System Architecture
+## System Architecture
 
 ```
 ┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
@@ -88,15 +95,17 @@ A comprehensive manufacturing management system built with Laravel 12, designed 
 ```
 
 ### Key Components
+
 - **Controllers**: Handle HTTP requests and business logic
 - **Models**: Eloquent ORM models with relationships
 - **Views**: Blade templates with component-based architecture
 - **Middleware**: Role-based access control and authentication
 - **Services**: Business logic abstraction (where applicable)
 
-## 🚀 Installation
+## Installation
 
 ### Prerequisites
+
 - PHP 8.2 or higher
 - Composer
 - Node.js & NPM
@@ -104,12 +113,14 @@ A comprehensive manufacturing management system built with Laravel 12, designed 
 - Web server (Apache/Nginx)
 
 ### Step 1: Clone Repository
+
 ```bash
 git clone https://github.com/your-username/idefu-manufacturing-laravel.git
 cd idefu-manufacturing-laravel
 ```
 
 ### Step 2: Install Dependencies
+
 ```bash
 # Install PHP dependencies
 composer install
@@ -119,6 +130,7 @@ npm install
 ```
 
 ### Step 3: Environment Setup
+
 ```bash
 # Copy environment file
 cp .env.example .env
@@ -128,7 +140,9 @@ php artisan key:generate
 ```
 
 ### Step 4: Database Configuration
+
 Update your `.env` file with database credentials:
+
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -139,6 +153,7 @@ DB_PASSWORD=your_password
 ```
 
 ### Step 5: Database Migration
+
 ```bash
 # Run migrations
 php artisan migrate
@@ -148,12 +163,14 @@ php artisan db:seed
 ```
 
 ### Step 6: Storage Setup
+
 ```bash
 # Create storage link
 php artisan storage:link
 ```
 
 ### Step 7: Build Assets
+
 ```bash
 # Build for development
 npm run dev
@@ -163,13 +180,15 @@ npm run build
 ```
 
 ### Step 8: Start Development Server
+
 ```bash
 php artisan serve
 ```
 
-## ⚙️ Configuration
+## Configuration
 
 ### Environment Variables
+
 Key configuration options in `.env`:
 
 ```env
@@ -199,6 +218,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 ### File Storage
+
 - **Public Storage**: `storage/app/public` (linked to `public/storage`)
 - **Private Storage**: `storage/app/private`
 - **Custom Products**: `storage/app/public/custom-products`
@@ -209,6 +229,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ### Core Tables
 
 #### Users
+
 ```sql
 - id (Primary Key)
 - name (String)
@@ -220,6 +241,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 #### Customers
+
 ```sql
 - id (Primary Key)
 - name (String)
@@ -229,6 +251,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 #### Products
+
 ```sql
 - id (Primary Key)
 - name (Unique String)
@@ -244,6 +267,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 #### Orders
+
 ```sql
 - id (Primary Key)
 - order_number (Unique String)
@@ -262,6 +286,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 #### Invoices
+
 ```sql
 - id (Primary Key)
 - order_id (Foreign Key)
@@ -278,6 +303,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ```
 
 ### Supporting Tables
+
 - **Purchases**: Material purchases tracking
 - **Production Costs**: Production cost tracking
 - **Incomes**: Payment and income tracking
@@ -285,6 +311,7 @@ MAIL_FROM_NAME="${APP_NAME}"
 ## 👤 User Roles & Permissions
 
 ### Role Hierarchy
+
 1. **Owner**: Full system access
 2. **Admin**: Administrative access
 3. **Finance**: Financial operations
@@ -292,20 +319,21 @@ MAIL_FROM_NAME="${APP_NAME}"
 
 ### Permission Matrix
 
-| Feature | Owner | Admin | Finance | Staff |
-|---------|-------|-------|---------|-------|
-| Dashboard | ✅ | ✅ | ✅ | ✅ |
-| Order Management | ✅ | ✅ | ❌ | ✅ |
-| Product Management | ✅ | ✅ | ❌ | ✅ |
-| Customer Management | ✅ | ✅ | ❌ | ✅ |
-| Invoice Generation | ✅ | ✅ | ✅ | ✅ |
-| Financial Reports | ✅ | ✅ | ❌ | ❌ |
-| User Management | ✅ | ✅ | ❌ | ❌ |
-| System Settings | ✅ | ✅ | ❌ | ❌ |
+| Feature             | Owner | Admin | Finance | Staff |
+| ------------------- | ----- | ----- | ------- | ----- |
+| Dashboard           | ✅    | ✅    | ✅      | ✅    |
+| Order Management    | ✅    | ✅    | ❌      | ✅    |
+| Product Management  | ✅    | ✅    | ❌      | ✅    |
+| Customer Management | ✅    | ✅    | ❌      | ✅    |
+| Invoice Generation  | ✅    | ✅    | ✅      | ✅    |
+| Financial Reports   | ✅    | ✅    | ❌      | ❌    |
+| User Management     | ✅    | ✅    | ❌      | ❌    |
+| System Settings     | ✅    | ✅    | ❌      | ❌    |
 
 ## 📚 API Documentation
 
 ### Authentication Routes
+
 ```php
 POST /login          # User login
 POST /logout         # User logout
@@ -313,6 +341,7 @@ GET  /verify-email   # Email verification
 ```
 
 ### Core Resource Routes
+
 ```php
 # Orders
 GET    /orders              # List orders
@@ -337,6 +366,7 @@ GET    /invoices/{id}/download        # Download PDF
 ```
 
 ### Report Routes
+
 ```php
 GET /reports              # Reports dashboard
 GET /reports/orders       # Order reports
@@ -349,6 +379,7 @@ GET /reports/export       # Export reports
 ## 📖 Usage Guide
 
 ### Creating an Order
+
 1. Navigate to **Orders** → **Create New Order**
 2. Select customer and product type (Fixed/Custom)
 3. Fill in order details and specifications
@@ -357,6 +388,7 @@ GET /reports/export       # Export reports
 6. Save order
 
 ### Managing Production
+
 1. Go to order details page
 2. Add BOM items and material requirements
 3. Record material purchases
@@ -364,6 +396,7 @@ GET /reports/export       # Export reports
 5. Update order status as production progresses
 
 ### Generating Invoices
+
 1. Ensure order is completed and priced
 2. Navigate to order details
 3. Click **Generate Invoice**
@@ -371,6 +404,7 @@ GET /reports/export       # Export reports
 5. Download or send invoice
 
 ### Viewing Reports
+
 1. Access **Reports** section (Owner/Admin only)
 2. Select report type and date range
 3. View analytics and charts
@@ -379,6 +413,7 @@ GET /reports/export       # Export reports
 ## 🛠 Development
 
 ### Development Environment Setup
+
 ```bash
 # Install development dependencies
 composer install --dev
@@ -394,6 +429,7 @@ composer run dev
 ```
 
 ### Code Style
+
 ```bash
 # Fix code style issues
 ./vendor/bin/pint
@@ -403,6 +439,7 @@ composer run dev
 ```
 
 ### Database Operations
+
 ```bash
 # Create new migration
 php artisan make:migration create_table_name
@@ -421,6 +458,7 @@ php artisan migrate:fresh --seed
 ```
 
 ### Asset Management
+
 ```bash
 # Watch for changes (development)
 npm run dev
@@ -435,6 +473,7 @@ npm install package-name
 ## 🧪 Testing
 
 ### Running Tests
+
 ```bash
 # Run all tests
 php artisan test
@@ -447,6 +486,7 @@ php artisan test --coverage
 ```
 
 ### Test Structure
+
 ```
 tests/
 ├── Feature/          # Feature tests
@@ -456,9 +496,10 @@ tests/
 └── TestCase.php     # Base test case
 ```
 
-## 🚀 Deployment
+## Deployment
 
 ### Production Checklist
+
 - [ ] Set `APP_ENV=production`
 - [ ] Set `APP_DEBUG=false`
 - [ ] Configure production database
@@ -472,6 +513,7 @@ tests/
 - [ ] Build production assets: `npm run build`
 
 ### Environment-Specific Configuration
+
 ```bash
 # Production optimizations
 php artisan config:cache
@@ -487,15 +529,17 @@ php artisan view:clear
 ```
 
 ### Docker Deployment (Optional)
+
 ```dockerfile
 # Example Dockerfile
 FROM php:8.2-fpm
 # ... additional configuration
 ```
 
-## 🤝 Contributing
+## Contributing
 
 ### Development Workflow
+
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/amazing-feature`
 3. Make your changes
@@ -506,6 +550,7 @@ FROM php:8.2-fpm
 8. Open a Pull Request
 
 ### Code Standards
+
 - Follow PSR-12 coding standards
 - Write comprehensive tests
 - Document complex functionality
@@ -513,26 +558,29 @@ FROM php:8.2-fpm
 - Keep functions small and focused
 
 ### Pull Request Guidelines
+
 - Provide clear description of changes
 - Include relevant tests
 - Update documentation if needed
 - Ensure all tests pass
 - Follow the existing code style
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Support
+## Support
 
 For support and questions:
+
 - Create an issue on GitHub
 - Contact the development team
 - Check the documentation wiki
 
-## 🔄 Changelog
+## Changelog
 
 ### Version 1.0.0
+
 - Initial release
 - Core manufacturing management features
 - User authentication and role management
